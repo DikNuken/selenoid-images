@@ -28,7 +28,7 @@ BROWSERS = {
         'browser': 'yandex',
         'repo_url': 'https://repo.yandex.ru/yandex-browser/deb/dists/beta/main/binary-amd64/',
         'package_name': 'yandex-browser-beta',
-        'tag': 'yandex-beta'
+        'tag': 'beta'
     },
     'opera-stable': {
         'browser': 'opera',
@@ -72,8 +72,8 @@ def main():
     for browser, browser_info in BROWSERS.items():
         version = get_last_package_version(browser_info['repo_url'], browser_info['package_name'])
         driver_version = get_driver_version(browser_info['browser'], version)
-
-        cmd = ['sh', f"automate_{browser_info['browser']}.sh", version, driver_version, browser_info['tag']]
+        print(browser, version, driver_version)
+        cmd = ['bash', f"automate_{browser_info['browser']}.sh", version, driver_version, browser_info['tag']]
         print(cmd)
         subprocess.run(cmd, stdout=sys.stdout, stderr=sys.stderr, input=b'n')
 
